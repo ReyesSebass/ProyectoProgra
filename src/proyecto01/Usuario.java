@@ -1,7 +1,11 @@
 /*
 MÓDULO 1: REGISTRO DE USUARIOS 
-*/
+ */
 package proyecto01;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class Usuario {
 
@@ -13,6 +17,9 @@ public class Usuario {
     protected Estado estado;
     protected TipoUsuario tipo;
 
+//-.-.-.-.-.-.-.-.-.-.--.-.ARRAYlIST-.-.-.-.-.-.-.-.-.-.-.-.-.--.
+    private List usuarios = new ArrayList();
+
 //-.-.-.-.-.-.-.-.-.-.--.-.CONSTRUCTOR-.-.-.-.-.-.-.-.-.-.-.-.-.--.
     public Usuario() {
         this.nombre = "";
@@ -20,13 +27,32 @@ public class Usuario {
         this.nickname = "";
         this.password = "";
         this.estado = null;
-        this.tipo=null;
-        
+        this.tipo = null;
+
     }
 
 //-.-.-.-.-.-.-.-.-.-.--.-.FUNCIONES-.-.-.-.-.-.-.-.-.-.-.-.-.--.
     public void agregarU() {
-        //arrayList
+        nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre:");
+        apellidos = JOptionPane.showInputDialog(null, "Ingrese los apellidos:");
+        nickname = JOptionPane.showInputDialog(null, "Ingrese el nombre de usuario:");
+        password = JOptionPane.showInputDialog(null, "Ingrese la contraseña:");
+        //Mostrar un cuadro de diálogo para elegir el tipo de usuario
+        //Pobablemente esto se cambie, tampoco estoy seguro si así esta bien, no lo probe 
+        TipoUsuario[] tipos = TipoUsuario.values();
+        tipo = (TipoUsuario) JOptionPane.showInputDialog(
+                null, "Seleccione el tipo de usuario:",
+                "Tipo de Usuario",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                tipos,
+                tipos[0]
+        );
+        //FALTA LO DEL ESTADO
+        
+        //Preguntarle al profe como se agrega en este caso
+//        Usuario nuevoUsuario = new Usuario(nombre, apellidos, nickname, password, tipo);
+//        usuarios.add(nuevoUsuario);
     }
 
     public void consultarU() {
@@ -86,5 +112,5 @@ public class Usuario {
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo;
     }
-    
+
 }
