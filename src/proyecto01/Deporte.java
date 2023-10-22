@@ -55,5 +55,6 @@ public class Deporte {
     public void setTipo(TipoDeporte tipo) {
         this.tipo = tipo;
     }
+    //Fin
     
 }

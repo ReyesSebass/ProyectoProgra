@@ -18,7 +18,7 @@ public class Usuario {
     protected TipoUsuario tipo;
 
 //-.-.-.-.-.-.-.-.-.-.--.-.ARRAYlIST-.-.-.-.-.-.-.-.-.-.-.-.-.--.
-    private List usuarios = new ArrayList();
+    private List<Usuario> usuarios = new ArrayList<>();
 
 //-.-.-.-.-.-.-.-.-.-.--.-.CONSTRUCTOR-.-.-.-.-.-.-.-.-.-.-.-.-.--.
     public Usuario() {
@@ -33,14 +33,14 @@ public class Usuario {
 
 //-.-.-.-.-.-.-.-.-.-.--.-.FUNCIONES-.-.-.-.-.-.-.-.-.-.-.-.-.--.
     public void agregarU() {
-        nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre:");
-        apellidos = JOptionPane.showInputDialog(null, "Ingrese los apellidos:");
-        nickname = JOptionPane.showInputDialog(null, "Ingrese el nombre de usuario:");
-        password = JOptionPane.showInputDialog(null, "Ingrese la contraseña:");
+        Usuario usuario = new Usuario();
+        usuario.nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre:");
+        usuario.apellidos = JOptionPane.showInputDialog(null, "Ingrese los apellidos:");
+        usuario.nickname = JOptionPane.showInputDialog(null, "Ingrese el nombre de usuario:");
+        usuario.password = JOptionPane.showInputDialog(null, "Ingrese la contraseña:");
         //Mostrar un cuadro de diálogo para elegir el tipo de usuario
-        //Pobablemente esto se cambie, tampoco estoy seguro si así esta bien, no lo probe 
         TipoUsuario[] tipos = TipoUsuario.values();
-        tipo = (TipoUsuario) JOptionPane.showInputDialog(
+        usuario.tipo = (TipoUsuario) JOptionPane.showInputDialog(
                 null, "Seleccione el tipo de usuario:",
                 "Tipo de Usuario",
                 JOptionPane.QUESTION_MESSAGE,
@@ -48,15 +48,48 @@ public class Usuario {
                 tipos,
                 tipos[0]
         );
-        //FALTA LO DEL ESTADO
-        
-        //Preguntarle al profe como se agrega en este caso
-//        Usuario nuevoUsuario = new Usuario(nombre, apellidos, nickname, password, tipo);
-//        usuarios.add(nuevoUsuario);
+        usuario.estado = Estado.Activo;
+
+        usuarios.add(usuario);
     }
 
     public void consultarU() {
-        //arrayList 
+        // Verificar si la lista de usuarios está vacía
+        if (usuarios.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay usuarios registrados.");
+            return;
+        }
+
+        // Recorrer la lista de usuarios e imprimir la información de cada uno
+        System.out.println("Lista de usuarios registrados:");
+        for (Usuario usuario : usuarios) {
+            System.out.println("Nombre: " + usuario.getNombre() + "\n"
+                    + "Apellidos: " + usuario.getApellidos() + "\n"
+                    + "Nickname: " + usuario.getNickname() + "\n"
+                    + "Tipo de Usuario: " + usuario.getTipo() + "\n"
+                    + "Estado: " + usuario.getEstado() + "\n"
+                    + "-------------------------------------");
+        }
+    }
+
+    public void consultarUEspecifico() {
+        boolean encontrado = false;
+        for (Usuario usuario : usuarios) {
+            String buscado = JOptionPane.showInputDialog(null, "Ingrese el nombre de usuario a consultar:");
+            if (usuario.getNickname().equals(buscado)) {
+                JOptionPane.showMessageDialog(null, "Nombre: " + usuario.getNombre() + "\n"
+                        + "Apellidos: " + usuario.getApellidos() + "\n"
+                        + "Nickname: " + usuario.getNickname() + "\n"
+                        + "Tipo de Usuario: " + usuario.getTipo() + "\n"
+                        + "Estado: " + usuario.getEstado());
+                encontrado = true;
+                break; // Si encontramos al usuario, podemos salir del bucle.
+            }
+        }
+
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado.");
+        }
     }
 
     public void inactivarU() {
@@ -112,5 +145,6 @@ public class Usuario {
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo;
     }
+    //Fin
 
 }

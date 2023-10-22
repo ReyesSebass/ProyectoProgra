@@ -88,4 +88,5 @@ public class Deportista extends Usuario {
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
+    //Fin
 }

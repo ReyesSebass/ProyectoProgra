@@ -65,5 +65,5 @@ public class Factura {
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
-
+    //Fin
 }
