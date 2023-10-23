@@ -9,12 +9,15 @@ public class Deporte {
     protected String nombre;
     protected String caracteristicas;
     protected TipoDeporte tipo;
+    protected String Usuario;
+
 
 //-.-.-.-.-.-.-.-.-.-.--.-.CONSTRUCTOR-.-.-.-.-.-.-.-.-.-.-.-.-.--.
     public Deporte() {
        this.caracteristicas="";
        this.nombre="";
        this.tipo=null;
+       this.Usuario="";
     }
 
 //-.-.-.-.-.-.-.-.-.-.--.-.FUNCIONES-.-.-.-.-.-.-.-.-.-.-.-.-.--.
@@ -56,5 +59,12 @@ public class Deporte {
         this.tipo = tipo;
     }
     //Fin
-    
+
+    public String getUsuario(){
+        return Usuario;
+        
+    }
+    public void setUsuario(String Usuario){
+        this.Usuario=Usuario;
+    }
 }
