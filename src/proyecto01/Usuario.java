@@ -1,13 +1,12 @@
-/*
-MÓDULO 1: REGISTRO DE USUARIOS 
- */
 package proyecto01;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Usuario {
+    /*
+MÓDULO 1: REGISTRO DE USUARIOS 
+ */
 
 //-.-.-.-.-.-.-.-.-.-.--.-.ATRIBUTOS-.-.-.-.-.-.-.-.-.-.-.-.-.--.
     protected String nombre;
@@ -36,7 +35,7 @@ public class Usuario {
         Usuario usuario = new Usuario();
         usuario.nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre:");
         usuario.apellidos = JOptionPane.showInputDialog(null, "Ingrese los apellidos:");
-        usuario.nickname = JOptionPane.showInputDialog(null, "Ingrese el nombre de usuario:");
+        usuario.nickname = JOptionPane.showInputDialog(null, "Ingrese el apodo del usuario:");
         usuario.password = JOptionPane.showInputDialog(null, "Ingrese la contraseña:");
         //Mostrar un cuadro de diálogo para elegir el tipo de usuario
         TipoUsuario[] tipos = TipoUsuario.values();
@@ -76,7 +75,7 @@ public class Usuario {
         boolean encontrado = false;
         for (Usuario usuario : usuarios) {
             String buscado = JOptionPane.showInputDialog(null, "Ingrese el nombre de usuario a consultar:");
-            if (usuario.getNickname().equals(buscado)) {
+            if (usuario.getNombre().equals(buscado)) {
                 JOptionPane.showMessageDialog(null, "Nombre: " + usuario.getNombre() + "\n"
                         + "Apellidos: " + usuario.getApellidos() + "\n"
                         + "Nickname: " + usuario.getNickname() + "\n"
@@ -93,8 +92,38 @@ public class Usuario {
     }
 
     public void inactivarU() {
-        //arrayList . verificar que el usario no tenga datos relacionados en ninguno 
-        //de los otros catálogos antes de inactivar 
+        String nombreInactivar = JOptionPane.showInputDialog(null, "Ingrese el nombre del usuario a inactivar:");
+
+        // Buscar al usuario por su nickname
+        Usuario usuarioInactivar = null;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombre().equals(nombreInactivar)) {
+                usuarioInactivar = usuario;
+                break;
+            }
+        }
+
+        if (usuarioInactivar == null) {
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado.");
+            return;
+        }
+
+        boolean tieneDatosRelacionados = false;
+        ArrayList<Deporte> deporteCatalogo = new ArrayList<>();
+
+        for (Deporte deporte : deporteCatalogo) {
+            if (deporte.getUsuario().equals(nombreInactivar)) {
+                tieneDatosRelacionados = true;
+                break;
+            }
+        }
+
+        if (tieneDatosRelacionados) {
+            JOptionPane.showMessageDialog(null, "El usuario tiene datos relacionados en el catálogo 'Deporte'. No se puede inactivar.");
+        } else {
+            usuarioInactivar.setEstado(Estado.Inactivo);
+            JOptionPane.showMessageDialog(null, "El usuario ha sido inactivado.");
+        }
     }
 //-.-.-.-.-.-.-.-.-.-.-.--GETTER Y SETTER-.-.-.-.-.-.-.-.-.-.-.-.-
 
